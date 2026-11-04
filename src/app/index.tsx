@@ -1,17 +1,27 @@
-import { Text, View, StyleSheet } from "react-native";
+import React from 'react';
+import { SafeAreaView, StyleSheet, StatusBar } from 'react-native';
+import { Display } from '../components/Display';
+import { Keypad } from '../components/Keypad';
+import { colors } from '../styles/app-themes';
+import { useCalculator } from '../hooks/useCalculator';
 
-export default function Index() {
+export default function CalculatorScreen() {
+  const { displayValue, formula, handleButtonPress } = useCalculator();
+
   return (
-    <View style={styles.container}>
-      <Text>Edit src/app/index.tsx to edit this screen.</Text>
-    </View>
+    <SafeAreaView style={styles.container}>
+      <StatusBar barStyle="light-content" backgroundColor={colors.background} />
+      <Display value={displayValue} formula={formula} />
+      <Keypad onPressButton={handleButtonPress} />
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
+    backgroundColor: colors.background,
+    justifyContent: 'flex-end',
+    padding: 16,
   },
 });
